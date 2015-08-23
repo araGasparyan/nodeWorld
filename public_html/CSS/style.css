@@ -1,0 +1,311 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Jul 17, 2015, 8:18:22 PM
+    Author     : Ara
+*/
+
+html {
+    margin:0;
+    padding:0;
+    border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+article, aside, details, figcaption, figure, dialog,
+footer, header, hgroup, menu, nav, section {
+    display:block;
+}
+
+
+body {
+    line-height: 1;
+    background: white;
+}
+
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+caption, th, td {
+    text-align: left;
+    float:none !important;
+}
+table, th, td {
+    vertical-align: middle;
+}
+
+
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+blockquote, q { quotes: "" ""; }
+
+
+a img { border: none; }
+
+
+:focus { outline: 0; }
+
+header div{
+    display: inline-block;
+    
+}
+
+header h1 {
+  text-transform: uppercase;
+  font-family: arial;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 63px;
+  width: 100%;
+  line-height: 1.5;
+}
+
+header img {
+  float: right;
+}
+
+a {
+    cursor: pointer;
+}
+
+.hello {
+    width: 92%;
+    background-image: url(headerback.png);
+}
+
+.earth {
+    width: 6%;
+    vertical-align: top;
+}
+.myclass{
+    border: 1px solid black;
+}
+
+
+.continent{
+    
+}
+
+.region{
+    
+}
+
+.indepYear{
+    
+}
+
+.population{
+    
+}
+
+.lifeExpectancy{
+    
+}
+
+.localName{
+    
+}
+
+.governmentForm{
+    
+}
+
+.surfaceArea::before{
+    content: url(smiley.png);
+    margin-right: 5px;    
+}
+
+.headOfState{
+    
+}
+
+.capital{
+    
+}
+
+#clock {
+    width: 223px;
+    height: 226px;
+    position: relative;
+    display: table;
+    clear: both;
+    margin: 0px auto;
+}
+
+#clock canvas{
+    position: absolute;
+    top: 6px;
+    left: 4px;
+}
+
+.countryInfo{
+   
+}
+
+.town {
+   background-image: url(cities/town.png);
+   width: 50px;
+   height: 50px;
+   background-repeat: no-repeat;
+}
+
+.city {
+   background-image: url(cities/city.png);  
+   width: 50px;
+   height: 50px;
+   background-repeat: no-repeat;
+}
+
+.bigCity {
+   background-image: url(cities/bigCity.png);  
+   width: 50px;
+   height: 50px;
+   background-repeat: no-repeat;
+}
+
+.continentInfo {
+    float:left;
+    position: relative;
+}
+            
+.addInfo {
+    float:left;
+    margin-left:25px;
+    width: 75%;
+    height: 410px;
+    background-color: #F0F0F5;
+}
+
+.addInfo div+div{
+    border-top:1px solid ;
+}
+
+.mainInfo {
+    margin-top: 15px;
+}
+            
+.mainInfo div+div{
+    border-top:1px solid black;
+}
+
+.info {
+    background-color: #F0F0F5;
+    padding: 7px 10px;
+}
+
+.clearfix:after { 
+    content: "."; 
+    visibility: hidden; 
+    display: block; 
+    height: 0; 
+    clear: both;
+}
+
+.cityLanguage {
+    clear: both;
+    padding: 25px 0;
+}
+
+.datas {
+                float: left;
+                width: 46.4%;
+                height: 300px;
+                padding: 15px;
+                background-color: #F0F0F5;
+                overflow-y: scroll;
+}
+
+.datas td {
+                padding: 7px;
+}
+            
+ tr:first-child {
+     text-transform: uppercase;
+     font-weight: bold !important;
+}
+            
+.languages {
+                margin-left: 25px;
+}
+
+.geoText {
+    font-family: arial;
+    text-indent: 50px;
+    line-height: 1.5;
+    padding: 0 15px;
+    text-align: justify;
+    width: 92%;
+}
+
+.countryInfoField{
+    padding-left: 15px;
+    padding-top: 50px;
+  
+}
+
+#names{
+	width: 250px;
+	min-height: 100px;
+  	list-style: none;
+        
+       
+}
+
+#names li {
+     padding-top: 5px;
+     cursor: pointer;
+}
+
+.selected{
+    background-color: cyan;
+}
+
+#regionnames li {
+     padding-top: 5px;
+     cursor: pointer;
+}
+
+#govformnames li {
+     padding-top: 5px;
+     cursor: pointer;
+}
+
+.suggestions li{
+    list-style: none;
+    font-size: 30pt;
+    padding: 20px;
+    border: 1px rgba(51, 103, 153, 0.24) solid;
+    width: 90%;
+    background-color: rgba(222, 238, 255, 0.56);
+}
+
+.suggestions a {
+   color: #336799;
+   text-decoration: none;
+  }
+.suggestions a:hover {
+   color: #336799;
+  font-size: 31pt;
+   text-decoration: none;
+  }
