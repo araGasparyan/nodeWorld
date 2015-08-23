@@ -3,40 +3,7 @@ var db = require("../model/db/ConecctDB.js");
 var checkers = require("../model/validation/Checkers.js");
 
 
-var index=function(req, res){
-    if(req.method.toLowerCase() === "post") {
-    req.on("data", function(postBody) {
-        var con = db.connectDB();
-        var query = querystring.parse(postBody.toString());
-        con.connect();
-        
-        //check login and password of the user
-        con.query("SELECT * FROM users where login='"+query.userName+"' AND password='"+query.password+"';", function(err, rows, fields) {
-        if (!err){
-        if(checkers.outputExists(rows)){
-        req.session.successLogin=true;
-        res.redirect("/home");
-        //console.log(req.session.successLogin);
-        } else {
-        res.render("index", {
-        title: "Welcome",
-        message: "Authorization failed: Please enter correct login and password"
-        });
-        }
-        }
-        else{
-        throw new Error(err);
-        }
-        });
-        con.end();
-    });
-    } else {
-    res.render("index", {
-       title: "Welcome",
-       message: ""
-    });
-}
-};
+
 
 var home=function(req, res){
     if(req.session.successLogin){

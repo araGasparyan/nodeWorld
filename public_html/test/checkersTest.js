@@ -42,7 +42,7 @@ describe('Checkers#outputExists()', function () {
 
 //This tests if the function throws error, when not array is passed through the function
 describe('Checkers#outputExists()', function () {
-    it('should throw', function (done) {
+    it('should throw error when not array passes as an argument', function (done) {
     assert.throws(function() { checkers.outputExists({}); }, Error);
     done();
     });

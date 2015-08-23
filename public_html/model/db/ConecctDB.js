@@ -22,22 +22,3 @@ var con = mysql.createConnection({
 return con;
 }
 
-//The function checks login and password of the user
-exports.checkLogin = function(login,password) {
-var con = connectDB();
-con.connect();
-con.query("SELECT * FROM users where login='"+login+"' AND password='"+password+"';", function(err, rows, fields) {
-if (!err){
-    return rows;
-}
-else{
-    throw new Error(err);
-}
-});
-con.end();
-};
-
-
-
-
-//module.exports = ConnectDB;

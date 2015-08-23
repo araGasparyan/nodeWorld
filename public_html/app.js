@@ -1,14 +1,20 @@
 var express = require('express');
+var session = require('express-session');
 var app=express();
 
 app.set("view engine", "ejs");
 //variable __dirname is the folder where appexp is
 app.set("views", __dirname+"/views");
-var routes = require('./routes');
+var routes = require('./routes/index');
 
 //this var is visible for every partial
 app.locals.pageTittle = "Something for all";
 
+//This helps to set session variables
+app.use(session({secret: 'QWERTY',
+saveUninitialized: true,
+resave: true    
+}));
 
 app.get("/", routes.index);
 app.post("/", routes.index);
