@@ -6,6 +6,7 @@ app.set("view engine", "ejs");
 //variable __dirname is the folder where appexp is
 app.set("views", __dirname+"/views");
 var routes = require('./routes/index');
+var countries = require('./routes/country');
 
 //this var is visible for every partial
 app.locals.pageTittle = "Something for all";
@@ -19,6 +20,7 @@ resave: true
 app.get("/", routes.index);
 app.post("/", routes.index);
 app.get("/home", routes.home);
+app.get("/country", countries.country);
 
 //import paths
 app.use(express.static(__dirname + '/CSS'));

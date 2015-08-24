@@ -19,12 +19,9 @@ return output;
 };
 
 
-//The function generates <td></td> elements of count tdCount, each of them has corresponding class from
+//The function generates <td></td> elements, each of them has corresponding class from
 //tdClasses, which depends on conditions on targets. Conditions are checked from the array condIntervals
-exports.addTdWithClass = function(tdCount,tdClasses,condIntervals,targets) {
-if(isNaN(tdCount)){
-    throw new Error("tdCount is not a Number");
-}
+exports.addTdWithClass = function(tdClasses,condIntervals,targets) {
 if(!Array.isArray(tdClasses)){
     throw new Error("tdClasses is not an Array");
 }
@@ -37,11 +34,11 @@ if(tdClasses.length != (condIntervals.length+1)){
 
 var output="";
 
-for(i=0;i<tdCount;i++){
-    if(targets[i]<=condIntervals[0]){
+for(var key in targets){
+    if(targets[key]<=condIntervals[0]){
                output+="<td class='"+tdClasses[0]+"'></td>";
             }
-            else if(targets[i]>condIntervals[0]&&targets[i]<=condIntervals[1]){
+            else if(targets[key]>condIntervals[0]&&targets[key]<=condIntervals[1]){
                output+="<td class='"+tdClasses[1]+"'></td>";
             }
             else{

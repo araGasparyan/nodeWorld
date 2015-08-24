@@ -1,0 +1,31 @@
+<html>
+    <head>
+    <% include partials/templates/head.ejs %>
+    </head>
+    <body>
+        <header>
+            <% include partials/templates/header.ejs %>
+        </header>
+        
+
+        <div class="countryInfo clearfix">
+            <!--the class name should be changed-->
+           <% include partials/content/countryMainInfo.ejs %> 
+        </div>
+        <div class="cityLanguage clearfix">
+            <% include partials/content/cities.ejs %> 
+            <% include partials/content/languages.ejs %> 
+        </div>
+
+
+
+
+
+
+
+
+        
+            <% include partials/content/clock.ejs %> 
+            <% include partials/templates/footer.ejs %>	
+            <% include partials/templates/jsDefaults.ejs %>
+    </html>   
