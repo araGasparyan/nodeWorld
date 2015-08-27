@@ -73,4 +73,20 @@ return con;
   };
    
      
-     
+   //The function ris created for tests
+   exports.test=function(countryName,callback){
+   var con = connectDB();
+   con.connect();
+   //check login and password of the user
+   con.query("SELECT * FROM `world`.`country` Where `country`.`Name` = ?", countryName, function(err, rows, fields) {
+        if (!err){
+            console.log(rows);
+        callback(rows);
+        }
+        else{
+        throw new Error(err);
+        }
+        });
+    con.end();
+  };
+

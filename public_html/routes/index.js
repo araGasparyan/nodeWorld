@@ -1,4 +1,3 @@
-
 var querystring = require("querystring");
 var db = require("../model/db/ConecctDB.js");
 var checkers = require("../model/validation/Checkers.js");
@@ -39,6 +38,8 @@ var home=function(req, res){
        res.redirect("/");
     }
 };
+
+
 
 //exports.about=function(req, res){
 //     res.render("default", {
