@@ -42,7 +42,7 @@ app.get("/home", routes.home);
 //  // Call next when done
 //  next();
 //});
-
+app.get("/country", countries.countries);
 app.get("/country/:countryId", countries.country);
 
 //import paths

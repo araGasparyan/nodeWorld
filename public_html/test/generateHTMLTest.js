@@ -13,7 +13,7 @@ describe('generateHTML#generateTable(result, className, additionalHeaders, targe
             name : "Ara",
             lastname : "Gasparyan",
             age : 28
-    }], "className", null),"<table class='className'><tr><td>name</td><td>lastname</td><td>age</td></tr><tr><td>Ara</td><td>Gasparyan</td><td>28</td></tr></table>");
+    }], "className", null,[]),"<table class='className'><tr><td>name</td><td>lastname</td><td>age</td></tr><tr><td>Ara</td><td>Gasparyan</td><td>28</td></tr></table>");
     assert.equal(generateHTML.generateTable([
     {
             name : "Ara",

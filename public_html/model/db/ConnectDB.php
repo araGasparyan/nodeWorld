@@ -61,45 +61,13 @@ class ConnectDB {
         return $this->result;
     }
     
-     //The method returns mysql query-result of the languages of the $country
-    function getLanguages($country){
-        $this->sql="Select `Language`, `IsOfficial`, `Percentage` FROM countrylanguage, country WHERE countrylanguage.CountryCode=country.Code AND `country`.`Name`='".$country."' order by `Percentage` DESC;";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
+  
 
-    //The method returns mysql query-result of the cities of the $country
-    function getCitiesOfTheCountry($country){
-        $this->sql="SELECT `city`.`Name`, District, `city`.`Population`  FROM city,country WHERE city.CountryCode=country.Code AND `country`.`Name`='".$country."' order by `city`.`Name`;";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
+  
     
-    //The method checks login and password of the user
-    function checkLogin($login,$password,$pages){
-        $this->sql="SELECT * FROM users where login='".$login."' AND password='".$password."';";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        if ($this->result->num_rows > 0){
-            return $pages[1];
-        }
-        else {
-            return $pages[0];
-        } 
-    }
     
-    //The method returns mysql query-result of the attributes of the $country
-    function getCountryInfo($countryName){
-        $this->sql="SELECT `Continent`, `Region`, `SurfaceArea`, `IndepYear`, `country`.`Population`, `LifeExpectancy`, `LocalName`, `GovernmentForm`, `HeadOfState`, city.`Name` AS capital"
-                   . "  FROM `world`.`country` LEFT JOIN world.`city` "
-                   . " ON city.`CountryCode`=`country`.`Code` Where (city.`ID` = `country`.`Capital` OR ISNULL(city.`ID`)) AND `country`.`Name` = '".$countryName."';";
-        //echo $this->sql;
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
+    
+    
     
     //The method returns json - which is an object of first (by alphavite) $limit countries which begin with letter $letter 
     function getCountriesWithLetter($letter, $limit){

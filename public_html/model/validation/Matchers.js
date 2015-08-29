@@ -53,3 +53,34 @@ switch (lifeExpectancy) {
 }
 return statement;
 };
+
+//The function returns picture's name of the continent of the provided continent
+exports.matchContinentPicture = function(continet) {
+var continenetPictureName;
+  switch (continet) {
+    case 'Africa':
+         continenetPictureName='Africa.png';
+        break;
+    case 'Antarctica':
+         continenetPictureName='Antarctica.png';
+        break;
+    case 'Asia':
+         continenetPictureName='Asia.png';
+        break;
+    case 'Europe':
+         continenetPictureName='Europe.jpg';
+        break;
+    case 'North America':
+         continenetPictureName='North_America.png';
+        break;
+    case 'Oceania':
+         continenetPictureName='Oceania.png';
+        break;
+    case 'South America':
+         continenetPictureName='South_America.png';
+        break;
+    default:
+        continenetPictureName='';
+}
+return continenetPictureName;
+};

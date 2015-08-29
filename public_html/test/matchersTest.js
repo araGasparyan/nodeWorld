@@ -23,7 +23,7 @@ describe('hooks', function() {
 });
  
 
-describe('Matchers#matchContinentName()', function () {
+describe('Matchers#matchContinentName(continenetNum)', function () {
     it('should return corresponding continent name of the passed argument', function (done) {
     var continent;
     continent = matchers.matchContinentName(0);
@@ -49,7 +49,7 @@ describe('Matchers#matchContinentName()', function () {
 });
 
 
-describe('Matchers#matchLifeExpectancyStatement()', function () {
+describe('Matchers#matchLifeExpectancyStatement(lifeExpectancy)', function () {
     it('should return corresponding continent name of the passed argument', function (done) {
     var statment;
     statment = matchers.matchLifeExpectancyStatement(0);
@@ -67,6 +67,32 @@ describe('Matchers#matchLifeExpectancyStatement()', function () {
     done();
    });
 });
+
+
+describe('Matchers#matchContinentPicture(continet)', function () {
+    it('should return corresponding continent picture of the passed argument', function (done) {
+    var continent;
+    continent = matchers.matchContinentPicture("Africa");
+    assert.equal(continent, "Africa.png");
+    continent = matchers.matchContinentPicture("Antarctica");
+    assert.equal(continent, "Antarctica.png");
+    continent = matchers.matchContinentPicture("Asia");
+    assert.equal(continent, "Asia.png");
+    continent = matchers.matchContinentPicture("Europe");
+    assert.equal(continent, "Europe.jpg");
+    continent = matchers.matchContinentPicture("North America");
+    assert.equal(continent, "North_America.png");
+    continent = matchers.matchContinentPicture("Oceania");
+    assert.equal(continent, "Oceania.png");
+    continent = matchers.matchContinentPicture("South America");
+    assert.equal(continent, "South_America.png");
+    continent = matchers.matchContinentPicture("somethingElse");
+    assert.equal(continent, "");
+    done();
+   });
+});
+
+
 
 
 //For error testing

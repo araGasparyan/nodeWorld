@@ -14,7 +14,8 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "express-session": "^1.11.3",
-    "mysql": "^2.9.0"
+    "mysql": "^2.9.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "chai": "^3.2.0",
