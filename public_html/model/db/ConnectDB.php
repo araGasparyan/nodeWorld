@@ -61,39 +61,11 @@ class ConnectDB {
         return $this->result;
     }
     
-  
-
-  
     
     
     
     
     
-    //The method returns json - which is an object of first (by alphavite) $limit countries which begin with letter $letter 
-    function getCountriesWithLetter($letter, $limit){
-        $this->sql="SELECT `country`.`Name` FROM country WHERE `country`.`Name` LIKE('".$letter."%') ORDER BY `country`.`Name` LIMIT ".$limit.";";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
-    
-    //The method returns json - which is an object of first (by alphavite) $limit regions which begin with letter $letter 
-    function getRegionsWithLetter($letter, $limit, $continent){
-        $this->sql="SELECT `country`.`Region` FROM country WHERE `country`.`Region` LIKE('".$letter."%') AND `country`.`Continent` LIKE '".Matchers::MatchContinentName($continent)."' GROUP BY `country`.`Region` ORDER BY `country`.`Region` LIMIT ".$limit.";";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
-    
-    //The method returns json - which is an object of first (by alphavite) $limit goverment forms which begin with letter $letter 
-    function getGovFormsWithLetter($letter, $limit){
-        $this->sql="SELECT `country`.`GovernmentForm` FROM country WHERE `country`.`GovernmentForm` LIKE('".$letter."%') GROUP BY `country`.`GovernmentForm` ORDER BY `country`.`GovernmentForm` LIMIT ".$limit.";";
-        $this->result=$this->con->query($this->sql);
-        $this->con->close();
-        return $this->result;
-    }
-    
-    //The method returns mysql query-result of the countries, which are ordered by the user
     function  findOrderedCountries($continent, $region, $surface_min, $surface_max, $population_min, $population_max, $life_expectancy, $government_form, $city_count, $languages){
         $this->sql="SELECT country.`Name` 
                     FROM `country`  

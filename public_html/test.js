@@ -1,3 +1,11 @@
-var x =[];
-console.log(x[0]);
+var db = require("./model/db/ConecctDB.js");
+
+db.getCities("Armenia", function(rows){
+        //console.log(typeof (rows));
+        console.log(rows);
+       
+  
+    });
+
+
 

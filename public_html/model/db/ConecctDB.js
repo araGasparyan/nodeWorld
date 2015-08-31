@@ -1,4 +1,5 @@
 var mysql = require('mysql');
+var matchers = require("../validation/Matchers.js");
 
 
 //The following variables incapsulates connection parametrs to a database
@@ -79,7 +80,7 @@ return con;
    var con = connectDB();
    con.connect();
    //check login and password of the user
-   con.query("Select `Language`, `IsOfficial`, `Percentage` FROM countrylanguage, country WHERE countrylanguage.CountryCode=country.Code AND `country`.`Name`='"+countryName+"' order by `Percentage` DESC;", countryName, function(err, rows, fields) {
+   con.query("Select `Language`, `IsOfficial`, `Percentage` FROM countrylanguage, country WHERE countrylanguage.CountryCode=country.Code AND `country`.`Name` = ? order by `Percentage` DESC;", countryName, function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
@@ -96,7 +97,7 @@ return con;
    var con = connectDB();
    con.connect();
    //check login and password of the user
-   con.query("SELECT `city`.`Name`, District, `city`.`Population`  FROM city,country WHERE city.CountryCode=country.Code AND `country`.`Name`='"+countryName+"' order by `city`.`Name`;", countryName, function(err, rows, fields) {
+   con.query("SELECT `city`.`Name`, District, `city`.`Population`  FROM city,country WHERE city.CountryCode=country.Code AND `country`.`Name`= ? order by `city`.`Name`;", countryName, function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
@@ -108,6 +109,118 @@ return con;
   };
   
   
+   
+   
+   
+    //The method returns json - which is an array of first (by alphavite) limit countries which begin with letter letter 
+    exports.getCountriesWithLetter=function(letter,limit,callback){
+    var con = connectDB();
+    con.connect();
+
+    con.query("SELECT `country`.`Name` FROM country WHERE `country`.`Name` LIKE ? ORDER BY `country`.`Name` LIMIT ?;",[letter+'%',limit], function(err, rows, fields) {
+        if (!err){
+        callback(rows);
+        }
+        else{
+        throw new Error(err);
+        }
+        });
+    con.end();
+    }; 
+
+
+
+
+   //The method returns json - which is an array of first (by alphavite) limit regions which begin with letter letter
+   //The function searches only in the current continent
+    exports.getRegionsWithLetter=function(letter,limit,continent,callback){
+    var con = connectDB();
+    con.connect();
+    var continentName=matchers.matchContinentName(continent);
+    //    if(typeof continent === 'string'){
+    //    continentName=continent;
+    //    }else{
+    //    continentName=matchers.matchContinentName(continent);
+    //    }
+    con.query("SELECT `country`.`Region` FROM country WHERE `country`.`Region` LIKE ? AND `country`.`Continent` LIKE ? GROUP BY `country`.`Region` ORDER BY `country`.`Region` LIMIT ?;",[letter+'%',continentName,limit], function(err, rows, fields) {
+        if (!err){
+        callback(rows);
+        }
+        else{
+        throw new Error(err);
+        }
+        });
+    con.end();
+    }; 
+    
+
+       
+    
+   //function returns array of first (by alphavite) limit goverment forms which begin with letter letter
+    exports.getGovFormsWithLetter=function(letter,limit,callback){
+    var con = connectDB();
+    con.connect();
+    con.query("SELECT `country`.`GovernmentForm` FROM country WHERE `country`.`GovernmentForm` LIKE ? GROUP BY `country`.`GovernmentForm` ORDER BY `country`.`GovernmentForm` LIMIT ? ;",[letter+'%',limit], function(err, rows, fields) {
+        if (!err){
+        callback(rows);
+        }
+        else{
+        throw new Error(err);
+        }
+        });
+    con.end();
+    }; 
+   
+   
+     //The method returns json - which is an array of countries, whiche were searched by the user in advanced serch form
+    exports.findOrderedCountries=function(continent, region, surface_min, surface_max, population_min, population_max, life_expectancy, government_form, city_count, languages, callback){
+    var con = connectDB();
+    con.connect();
+    var lifeExpStatment = matchers.matchLifeExpectancyStatement(life_expectancy);
+    con.query("SELECT country.`Name` "+
+            "FROM `country` "+
+            "LEFT JOIN `countrylanguage` ON `country`.`Code`=`countrylanguage`.`CountryCode` LEFT JOIN"+
+            " (SELECT COUNT(city.`CountryCode`) AS cityCount, country.`Code` AS CountryCode FROM"+
+            " `country` LEFT JOIN `city` ON `country`.`Code` = `city`.`CountryCode`"+
+            " GROUP BY `country`.`Code`) AS tmp"+
+            " ON `country`.`Code`=tmp.CountryCode"+
+            " where `country`.`Continent` LIKE ? AND `country`.`Region` LIKE ? AND `country`.`GovernmentForm` LIKE ?"+
+            lifeExpStatment+
+            " AND `country`.`Population`>=? AND country.`Population`<= ?"+
+            " AND `country`.`SurfaceArea` >= ? AND `country`.`SurfaceArea` <=? "+
+            "AND cityCount>= ?"+
+            " GROUP BY country.`Name`;",[continent, region, government_form, population_min, population_max, surface_min, surface_max, city_count, languages], function(err, rows, fields) {
+        if (!err){
+        callback(rows);
+        }
+        else{
+        throw new Error(err);
+        }
+        });
+    con.end();
+    }; 
+   
+   
+   
+                     
+                     
+                    
+                     
+                      
+                     
+                    
+                    
+                    
+                    
+                    
+                    
+                  
+   
+   
+   
+
+   
+   
    
    
    

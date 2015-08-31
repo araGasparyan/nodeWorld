@@ -60,7 +60,7 @@ app.get("*", function(req, res){
     res.send("Bad route");
 });
 
-var server=app.listen(3000, function(){
+var server=app.listen(3000, '10.10.2.23', function(){
     console.log("I am listening");
 });
 
