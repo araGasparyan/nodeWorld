@@ -98,8 +98,8 @@ describe('ConecctDB#getRegionsWithLetter(letter,limit,continent,callback)', func
     it('should return json - which is an array of first (by alphavite) limit regions (in the current continent) which begin with letter letter ', function (done) {
         db.getRegionsWithLetter("e", 3 , 3, function(rows){
         assert.deepEqual(rows, [{Region : 'Eastern Europe'}]);
-            db.getRegionsWithLetter("m", 100 , 2, function(rows){
-            assert.deepEqual(rows, [{Region : 'Middle East'}]);
+            db.getRegionsWithLetter("b", 100 , 'any', function(rows){
+            assert.deepEqual(rows, [{Region : 'Baltic Countries'}, {Region : 'British Islands'}]);
                 db.getRegionsWithLetter("M", 6 , 5, function(rows){
                 assert.deepEqual(rows, [{Region : 'Melanesia'}, {Region : 'Micronesia'}, {Region : 'Micronesia/Caribbean'}]);
                     db.getRegionsWithLetter("g", 6 ,"5", function(rows){
@@ -134,14 +134,14 @@ describe('ConecctDB#getGovFormsWithLetter(letter,limit,callback)', function () {
 
 describe('ConecctDB#findOrderedCountries(continent, region, surface_min, surface_max, population_min, population_max, life_expectancy, government_form, city_count, languages, callback)', function () {
     it('should return json - which is an array of countries, which were searched by the user in advanced serch form', function (done) {
-        db.findOrderedCountries("Europe", "Western Europe", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
+        db.findOrderedCountries(3, "Western Europe", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
         assert.deepEqual(rows, [{Name : 'Germany'}]);
-            db.findOrderedCountries("Europe", "Western Europe", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
-            //assert.deepEqual(rows, [{GovernmentForm : 'Administrated by the UN'}]);
-                db.findOrderedCountries("Europe", "Western Europe", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
-                //assert.deepEqual(rows, [{GovernmentForm : 'Socialistic Republic'}, {GovernmentForm : 'Socialistic State'}, {GovernmentForm : 'Special Administrative Region of China'}]);
-                    db.findOrderedCountries("Europe", "Western Europe", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
-                    //assert.deepEqual(rows, []);
+            db.findOrderedCountries(3, "Eastern Europe", -1, 9000000000, -1,90000000000,3,"%",-1,"aaaa", function(rows){
+            assert.deepEqual(rows, [{Name : 'Bulgaria'}, {Name : 'Czech Republic'}, {Name : 'Hungary'}, {Name : 'Poland'}, {Name : 'Slovakia'} ]);
+                db.findOrderedCountries(3, "does not excist", 1000, 10000000, 9000000,50000000000,3,"Federal Republic",5,"aaaa", function(rows){
+                assert.deepEqual(rows, []);
+                    db.findOrderedCountries("any", "", 29000,29900, "","","any","","","aaaa", function(rows){
+                    assert.deepEqual(rows, [{Name : 'Armenia'}]);
                     done();
                     });
                 });

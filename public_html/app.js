@@ -16,6 +16,8 @@ app.set('views', path.join(__dirname, 'views'));
 
 var routes = require('./routes/index');
 var countries = require('./routes/country');
+var suggestion = require('./routes/suggestion');
+
 
 //this var is visible for every partial
 app.locals.pageTittle = "Something for all";
@@ -36,14 +38,10 @@ app.get("/", routes.index);
 app.post("/", routes.index);
 app.get("/home", routes.home);
 
-//app.param('countryId', function(request, response, next, id){
-//  // Do something with id
-//  // Store id or other info in req object
-//  // Call next when done
-//  next();
-//});
 app.get("/country", countries.countries);
 app.get("/country/:countryId", countries.country);
+
+app.get("/suggestion", suggestion.suggestion);
 
 //import paths
 app.use(express.static(path.join(__dirname, '/CSS')));

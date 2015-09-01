@@ -172,11 +172,33 @@ return con;
     }; 
    
    
-     //The method returns json - which is an array of countries, whiche were searched by the user in advanced serch form
+    //The method returns json - which is an array of countries, whiche were searched by the user in advanced search form
     exports.findOrderedCountries=function(continent, region, surface_min, surface_max, population_min, population_max, life_expectancy, government_form, city_count, languages, callback){
     var con = connectDB();
     con.connect();
     var lifeExpStatment = matchers.matchLifeExpectancyStatement(life_expectancy);
+    continent=matchers.matchContinentName(continent);
+    if(region===""){
+       region="%";
+    }
+    if(surface_min===""){
+       surface_min="-1";
+    }
+    if(surface_max===""){
+       surface_max="9000000000";
+    }
+    if(population_min===""){
+       population_min=-1;
+    }
+    if(population_max===""){
+       population_max="9000000000";
+    }
+    if(government_form===""){
+       government_form="%";
+    }
+    if(city_count===""){
+       city_count="-1";
+    }
     con.query("SELECT country.`Name` "+
             "FROM `country` "+
             "LEFT JOIN `countrylanguage` ON `country`.`Code`=`countrylanguage`.`CountryCode` LEFT JOIN"+
@@ -189,7 +211,7 @@ return con;
             " AND `country`.`Population`>=? AND country.`Population`<= ?"+
             " AND `country`.`SurfaceArea` >= ? AND `country`.`SurfaceArea` <=? "+
             "AND cityCount>= ?"+
-            " GROUP BY country.`Name`;",[continent, region, government_form, population_min, population_max, surface_min, surface_max, city_count, languages], function(err, rows, fields) {
+            " GROUP BY country.`Name` order by country.`Name`;",[continent, region, government_form, population_min, population_max, surface_min, surface_max, city_count, languages], function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
@@ -201,9 +223,6 @@ return con;
     }; 
    
    
-   
-                     
-                     
                     
                      
                       
