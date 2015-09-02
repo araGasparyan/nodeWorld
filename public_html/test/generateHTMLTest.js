@@ -85,3 +85,33 @@ assert.equal(generateHTML.generateTable([{
    });
 });
 
+
+
+//This test checks the output of the function, when the second argument is null
+describe('generateHTML#generateList(result, href)', function () {
+    it('should return <li> elements without <a> elements, which are include arrays elements', function (done) {
+    assert.equal(generateHTML.generateList([],null),'0 results');
+    assert.equal(generateHTML.generateList([
+        {name: "Ara"},
+        {name: "Ashot"},
+        {name: "Armen"}
+    ], null), "<li>Ara</li><li>Ashot</li><li>Armen</li>");
+    done();
+   });
+});
+
+
+//This test checks the output of the function, when the second argument is not null
+describe('generateHTML#generateList(result, href)', function () {
+    it('should return <li> elements with <a> elements and href, which are include arrays elements', function (done) {
+    assert.equal(generateHTML.generateList([],null),'0 results');
+    assert.equal(generateHTML.generateList([
+        {name: "Ara"},
+        {name: "Ashot"},
+        {name: "Armen"}
+    ], '/country/'), "<li><a href='/country/Ara'>Ara</a></li><li><a href='/country/Ashot'>Ashot</a></li><li><a href='/country/Armen'>Armen</a></li>");
+    done();
+   });
+});
+
+

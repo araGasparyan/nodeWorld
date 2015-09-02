@@ -1,14 +1,11 @@
-var querystring = require("querystring");
 var db = require("../model/db/ConecctDB.js");
 var checkers = require("../model/validation/Checkers.js");
 
 
 var index=function(req, res){
     if(req.method.toLowerCase() === "post") {
-    req.on("data", function(postBody) {
-        var query = querystring.parse(postBody.toString());
         //check login and password of the user
-        db.checkLogin(query.userName, query.password, function(rows){
+        db.checkLogin(req.body.userName, req.body.password, function(rows){
         if(checkers.outputExists(rows)){
         req.session.successLogin=true;
         res.redirect("/home");
@@ -19,7 +16,7 @@ var index=function(req, res){
         });
         }
         });
-    });
+    
     } else {
     res.render("index", {
        title: "Welcome",

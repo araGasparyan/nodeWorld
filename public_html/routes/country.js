@@ -8,13 +8,10 @@ var url=require('url');
 
 var countries=function(req, res){
     if(req.session.successLogin){
-    var input = (url.parse(req.url)).search;
-    input=input.split('+').join(" ");
-    res.redirect("/country/"+input.substr(input.indexOf('=')+1));
+    res.redirect("/country/"+req.query.country);
     } else {
-       res.redirect("/");
+    res.redirect("/");
     }
-    
 };
 
 var country=function(req, res){

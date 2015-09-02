@@ -48,3 +48,27 @@ if(result.length>0){
 };
 
 
+
+
+exports.generateList = function(result, href) {
+    var output="";
+    if(result.length>0){
+        var fields = [];
+        for(var field in result[0]){
+        fields.push(field);
+        }
+        if(href===null){
+        for(var row in result){
+            output+='<li>'+result[row][fields[0]]+'</li>';
+        }
+        }else{
+            for(var row in result){
+            output+="<li><a href='"+href+result[row][fields[0]]+"'>"+result[row][fields[0]]+"</a></li>";
+            }
+        }
+    
+        return output;   
+    }else{
+        return '0 results';  
+    }
+};

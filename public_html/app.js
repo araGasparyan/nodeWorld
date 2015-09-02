@@ -1,7 +1,13 @@
 var express = require('express');
 var path = require('path');
 var session = require('express-session');
+var bodyParser = require('body-parser');
 var app=express();
+
+
+
+
+
 
 //var router = express.Router();
 
@@ -27,6 +33,14 @@ app.use(session({secret: 'QWERTY',
 saveUninitialized: true,
 resave: true    
 }));
+
+// instruct the app to use the `bodyParser()` middleware for all routes
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
+
+
 
 
 

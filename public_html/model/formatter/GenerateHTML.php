@@ -88,7 +88,7 @@ class generateHTML {
     $output="";    
     if ($result->num_rows > 0) {
         $columns=$result->fetch_fields();        
-        if($href!=null){       
+//        if($href!=null){       
         while($row = $result->fetch_assoc()) {
         $output.="<li>";
         foreach ($columns as $val) {
