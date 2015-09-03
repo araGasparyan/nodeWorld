@@ -28,14 +28,76 @@ $(document).ready(function(){
         liSelected = $('li').eq(-1);
         }
        
+       //formClass = ".countryInfoField"
+       //suggestionsID = "#names"; 
+       //inputFiledID = "#searchField"
+       //JsonPath = /govFormListJSON?q=
+       //
+       
+       function test(formClass, suggestionsID, inputFiledID, JsonPath){
+           
+           
+        liSelected=undefined;
+        $(formClass).unbind( "keydown" );
+        $(suggestionsID).html("");
+        
+        $.get(JsonPath+$(inputFiledID).val(), function(data) {
+        data = data.split(',');
+        for(var i in data) {
+        $(suggestionsID).append("<li onclick='choose(this,"+inputFiledID+','+suggestionsID+')'+"'"+ "onmouseover='fon(this)' onmouseout='unfon(this)'>"+data[i]+"</li>" );
+        }
+        });
+         if($(inputFiledID).val()==0){
+             $(suggestionsID).html("");
+        }
+    
+        $(formClass).keydown(function(e){
+            if(e.which === 40){
+                if(liSelected){
+                    liSelected.removeClass('selected');
+                    next = liSelected.next();
+                        if(next.length > 0){
+                            liSelected = next.addClass('selected');
+                        }else{
+                            liSelected = $(formClass + ' li').eq(0).addClass('selected');
+                        }
+                }else{
+                    liSelected = $(formClass + ' li').eq(0).addClass('selected');
+                }
+                $(inputFiledID).val(liSelected.text());
+            }else if(e.which === 38){
+                if(liSelected){
+                    liSelected.removeClass('selected');
+                    next = liSelected.prev();
+                        if(next.length > 0){
+                            liSelected = next.addClass('selected');
+                        }else{
+                            liSelected = $(formClass + ' li').last().addClass('selected');
+                        }
+                }else{
+                    liSelected = $(formClass + ' li').last().addClass('selected');
+                }
+                $(inputFiledID).val(liSelected.text());
+            }
+        });
+         
+           
+           
+           
+           
+           
+           
+       }
+       
        
         function getNamesAJAX1()  {
         liSelected=undefined;
         $( ".countryInfoField").unbind( "keydown" );
         $("#names").html("");
         
-        $.getJSON("countryListJSON.php?q="+$("#searchField").val(), function(data) {
-        for(i = 0; i < data.length; i++) {
+        $.get("/govFormListJSON?q="+$("#searchField").val(), function(data) {
+        data = data.split(',');
+        for(var i in data) {
         $("#names").append("<li onclick='choose(this,"+'"#searchField",'+'"#names")'+"'"+ "onmouseover='fon(this)' onmouseout='unfon(this)'>"+data[i]+"</li>" );
         }
         });

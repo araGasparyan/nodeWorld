@@ -9,9 +9,7 @@ var url=require('url');
 
 var suggestion=function(req, res){
     if(req.session.successLogin){
-    //input is the exppresion after ?    
-    //var input = (url.parse(req.url)).search;
-    //input is an array from parametrs
+       
     var region=req.query.region;
     var continent=req.query.continent;
     var surface_min=req.query.surface_min;
@@ -22,9 +20,8 @@ var suggestion=function(req, res){
     var government_form=req.query.government_form;
     var city_count=req.query.city_count;
     var languages;
-    console.log(req._parsedUrl);
+    //console.log(req._parsedUrl);
     db.findOrderedCountries(continent, region, surface_min, surface_max, population_min, population_max, life_expectancy, government_form, city_count, languages, function(rows){
-        //res.redirect("/country/"+input.substr(input.indexOf('=')+1));
         rows=genHTML.generateList(rows,'/country/');
         res.render("suggestion", {
             title: "suggestion",

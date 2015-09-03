@@ -1,14 +1,18 @@
-var querystring = require("querystring");
 var db = require("../model/db/ConecctDB.js");
+var querystring = require("querystring");
 var checkers = require("../model/validation/Checkers.js");
 var matchers = require("../model/validation/Matchers.js");
 var genHTML = require("../model/formatter/generateHTML.js");
 var url=require('url');
+var encoding = require('encoding');
 
 
 var countries=function(req, res){
     if(req.session.successLogin){
-    res.redirect("/country/"+req.query.country);
+    res.redirect("/country/"+encoding.convert(req.query.country, "utf-8"));
+    console.log(querystring.parse(req.query.country, null, null,
+    {}));
+ 
     } else {
     res.redirect("/");
     }
@@ -19,6 +23,7 @@ var country=function(req, res){
     if(req.session.successLogin){
   
         var countryId = req.params.countryId;
+        console.log(countryId);
         //find serched country and renders it
         db.getCountryInfo(countryId, function(rows){
         if(checkers.outputExists(rows)){

@@ -116,8 +116,11 @@ return con;
     exports.getCountriesWithLetter=function(letter,limit,callback){
     var con = connectDB();
     con.connect();
+    if(letter!==""){
+    letter=letter+'%';
+    }
 
-    con.query("SELECT `country`.`Name` FROM country WHERE `country`.`Name` LIKE ? ORDER BY `country`.`Name` LIMIT ?;",[letter+'%',limit], function(err, rows, fields) {
+    con.query("SELECT `country`.`Name` FROM country WHERE `country`.`Name` LIKE ? ORDER BY `country`.`Name` LIMIT ?;",[letter,limit], function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
@@ -137,12 +140,10 @@ return con;
     var con = connectDB();
     con.connect();
     var continentName=matchers.matchContinentName(continent);
-    //    if(typeof continent === 'string'){
-    //    continentName=continent;
-    //    }else{
-    //    continentName=matchers.matchContinentName(continent);
-    //    }
-    con.query("SELECT `country`.`Region` FROM country WHERE `country`.`Region` LIKE ? AND `country`.`Continent` LIKE ? GROUP BY `country`.`Region` ORDER BY `country`.`Region` LIMIT ?;",[letter+'%',continentName,limit], function(err, rows, fields) {
+    if(letter!==""){
+    letter=letter+'%';
+    }
+    con.query("SELECT `country`.`Region` FROM country WHERE `country`.`Region` LIKE ? AND `country`.`Continent` LIKE ? GROUP BY `country`.`Region` ORDER BY `country`.`Region` LIMIT ?;",[letter,continentName,limit], function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
@@ -160,7 +161,10 @@ return con;
     exports.getGovFormsWithLetter=function(letter,limit,callback){
     var con = connectDB();
     con.connect();
-    con.query("SELECT `country`.`GovernmentForm` FROM country WHERE `country`.`GovernmentForm` LIKE ? GROUP BY `country`.`GovernmentForm` ORDER BY `country`.`GovernmentForm` LIMIT ? ;",[letter+'%',limit], function(err, rows, fields) {
+    if(letter!==""){
+    letter=letter+'%';
+    }
+    con.query("SELECT `country`.`GovernmentForm` FROM country WHERE `country`.`GovernmentForm` LIKE ? GROUP BY `country`.`GovernmentForm` ORDER BY `country`.`GovernmentForm` LIMIT ? ;",[letter,limit], function(err, rows, fields) {
         if (!err){
         callback(rows);
         }

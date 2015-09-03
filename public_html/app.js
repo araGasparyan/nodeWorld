@@ -23,6 +23,8 @@ app.set('views', path.join(__dirname, 'views'));
 var routes = require('./routes/index');
 var countries = require('./routes/country');
 var suggestion = require('./routes/suggestion');
+var ajax = require('./routes/ajax');
+
 
 
 //this var is visible for every partial
@@ -56,6 +58,9 @@ app.get("/country", countries.countries);
 app.get("/country/:countryId", countries.country);
 
 app.get("/suggestion", suggestion.suggestion);
+app.get("/govFormListJSON", ajax.govFormListJSON);
+
+
 
 //import paths
 app.use(express.static(path.join(__dirname, '/CSS')));
