@@ -1,6 +1,6 @@
 <form class="countryInfoField" method="get" action="/country">
     <div class="aaa">
-        <input type="text" id="searchField" autocomplete="off" placeholder="Enter country name" name="country" oninput="test('.countryInfoField','#names','#searchField','/govFormListJSON?q=')">               
+        <input type="text" id="searchField" autocomplete="off" placeholder="Enter country name" name="country" oninput="showSuggestions('.countryInfoField','#names','#searchField','/countryList?q=','')">               
         <input type="submit" value="submit">
     </div>
         <ul id="names">

@@ -25,7 +25,7 @@
                     <li id="li_1" >
                         <label class="description" for="element_1">Region</label>
                         <div class="regionInfoField">
-                            <input id="element_1" name="region" autocomplete="off" class="element text medium" type="text" maxlength="255" value="" oninput="getNamesAJAX()" />
+                            <input id="element_1" name="region" autocomplete="off" class="element text medium" type="text" maxlength="255" value="" oninput="showSuggestions('.regionInfoField', '#regionnames', '#element_1', '/regionList?q=','c,#element_6')" />
                             <ul id="regionnames">
                             </ul>
                         </div> 
@@ -74,7 +74,7 @@
                     <li id="li_4" >
                         <label class="description" for="element_4">Government form</label>
                         <div class="govFormInfoField">
-                            <input id="element_4" autocomplete="off" name="government_form" class="element text medium" type="text" maxlength="255" value=""  oninput="getNamesAJAX2()"/>
+                            <input id="element_4" autocomplete="off" name="government_form" class="element text medium" type="text" maxlength="255" value=""  oninput="showSuggestions('.govFormInfoField', '#govformnames', '#element_4', '/govFormList?q=','')"/>
                             <ul id="govformnames">
                             </ul>
                         </div> 

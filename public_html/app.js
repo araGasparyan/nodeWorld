@@ -58,7 +58,9 @@ app.get("/country", countries.countries);
 app.get("/country/:countryId", countries.country);
 
 app.get("/suggestion", suggestion.suggestion);
-app.get("/govFormListJSON", ajax.govFormListJSON);
+app.get("/countryList", ajax.countryList);
+app.get("/govFormList", ajax.govFormList);
+app.get("/regionList", ajax.regionList);
 
 
 
