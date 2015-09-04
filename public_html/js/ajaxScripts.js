@@ -40,7 +40,8 @@
         JsonParams = tmp;
         };
         $.get(JsonPath+$(inputFiledID).val()+JsonParams, function(data) {
-        data = data.split(',');
+        data = data.split(';');
+        console.log(data);
         for(var i in data) {
         $(suggestionsID).append("<li onclick='choose(this,"+'"'+inputFiledID+'","'+suggestionsID+'"'+')'+"'"+ "onmouseover='fon(this)' onmouseout='unfon(this)'>"+data[i]+"</li>" );
         }

@@ -5,9 +5,9 @@ var genHTML = require("../model/formatter/generateHTML.js");
 var url=require('url');
 
 var fillSuggestionsIntoArray = function(rows, fieldName){
-    var suggestions = [];
+    var suggestions = "";
     for(var i in rows){
-        suggestions.push(rows[i][fieldName]);
+        suggestions+=rows[i][fieldName]+";";
     }
     return suggestions;
 };

@@ -7,24 +7,8 @@ var url=require('url');
 var encoding = require('encoding');
 
 
-var countries=function(req, res){
-    if(req.session.successLogin){
-    res.redirect("/country/"+encoding.convert(req.query.country, "utf-8"));
-    console.log(querystring.parse(req.query.country, null, null,
-    {}));
- 
-    } else {
-    res.redirect("/");
-    }
-};
-
-var country=function(req, res){
-  
-    if(req.session.successLogin){
-  
-        var countryId = req.params.countryId;
-        console.log(countryId);
-        //find serched country and renders it
+var countryInfo=function(res,countryId){
+    //find serched country and renders it
         db.getCountryInfo(countryId, function(rows){
         if(checkers.outputExists(rows)){
         var continentPic = matchers.matchContinentPicture(rows[0].Continent);
@@ -46,7 +30,30 @@ var country=function(req, res){
         } else {
         res.redirect("/home");
         }
-        });
+    });
+};
+
+
+var countries=function(req, res){
+    if(req.session.successLogin){
+    var countryId = req.query.country;
+    res.redirect("/country/"+countryId);
+    console.log(countryId);
+    
+ 
+    } else {
+    res.redirect("/");
+    }
+};
+
+var country=function(req, res){
+  
+    if(req.session.successLogin){
+    console.log(1);
+        var countryId = req.params.countryId;
+          console.log(countryId);
+        countryInfo(res,countryId);
+        
  
     } else {
        res.redirect("/");
