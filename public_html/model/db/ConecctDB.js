@@ -80,7 +80,7 @@ return con;
    var con = connectDB();
    con.connect();
    //check login and password of the user
-   con.query("Select `Language`, `IsOfficial`, `Percentage` FROM countrylanguage, country WHERE countrylanguage.CountryCode=country.Code AND `country`.`Name` = ? order by `Percentage` DESC;", countryName, function(err, rows, fields) {
+   con.query("Select `Language`, `IsOfficial`, `Percentage` FROM countrylanguage, country WHERE countrylanguage.CountryCode=country.Code AND `country`.`Name` = ? order by `Percentage` DESC, `Language`;", countryName, function(err, rows, fields) {
         if (!err){
         callback(rows);
         }
