@@ -42,7 +42,7 @@
         $.get(JsonPath+$(inputFiledID).val()+JsonParams, function(data) {
         data = data.split(';');
         console.log(data);
-        for(var i in data) {
+        for(var i=0;i<data.length-1;i++) {
         $(suggestionsID).append("<li onclick='choose(this,"+'"'+inputFiledID+'","'+suggestionsID+'"'+')'+"'"+ "onmouseover='fon(this)' onmouseout='unfon(this)'>"+data[i]+"</li>" );
         }
         });
@@ -78,7 +78,7 @@
                 $(inputFiledID).val(liSelected.text());
             }
         });
-        }
+    }
        
        
          
